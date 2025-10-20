@@ -1,60 +1,69 @@
 # 🏪 SISTEMA DE GESTIÓN PARA TIENDA DEPORTIVA
 
-Sistema web desarrollado para la administración integral de una tienda de artículos deportivos.  
-Permite gestionar productos, clientes, usuarios y ventas de manera eficiente, con una interfaz moderna y una base de datos relacional segura.
+Aplicación web desarrollada en **CodeIgniter 4** para la administración integral de una tienda de artículos deportivos.  
+Permite gestionar productos, tipos de productos, usuarios, clientes y ventas desde una interfaz moderna y organizada.
 
 ---
 
 ## 🧭 Descripción General
 
-El **Sistema de Gestión para Tienda Deportiva** es una aplicación web construida con **CodeIgniter 4**, diseñada para cubrir las necesidades administrativas de una tienda de deportes.  
-Ofrece módulos completos para el control de productos, tipos de productos, ventas, usuarios y clientes, facilitando las tareas de registro, consulta y mantenimiento de información.
+El **Sistema de Gestión para Tienda Deportiva** tiene como objetivo optimizar el manejo interno de una tienda deportiva, brindando herramientas para registrar, actualizar y consultar datos de inventario, clientes y transacciones comerciales.
+
+Incluye módulos de:
+- Gestión de productos y categorías (tipos).
+- Control de clientes y ventas.
+- Administración de usuarios y acceso.
+- Panel general (Dashboard) con resumen de la información.
 
 ---
 
 ## ⚙️ Características Principales
 
 ### 🔹 Gestión de Productos
-- Alta, baja y modificación de productos.
-- Asociación de cada producto a un **tipo de producto** (categoría).
-- Control de **precio, stock y descripción**.
-- Exportación de listados en **Excel, PDF, CSV**.
-- Filtro y búsqueda avanzada con **DataTables**.
+- CRUD completo (crear, leer, actualizar, eliminar).
+- Asociación con un tipo de producto (categoría).
+- Control de precios y stock.
+- Exportación a **Excel, PDF, CSV** con DataTables.
+- Filtros avanzados por nombre, precio, stock, tipo.
 
-### 🔹 Gestión de Tipos de Producto
-- Clasificación de los productos por categorías (ropa, calzado, equipamiento, etc.).
-- CRUD completo (crear, editar, eliminar tipos).
+### 🔹 Tipos de Productos
+- Clasificación de productos por categorías (ropa, calzado, fitness, etc.).
+- CRUD completo para administrar los tipos.
 
-### 🔹 Gestión de Ventas
-- Registro de ventas con cliente asociado.
-- Actualización automática de stock.
-- Historial de transacciones.
+### 🔹 Ventas
+- Registro y control de ventas con relación a clientes y productos.
+- Descuento automático del stock tras cada venta.
+- Listado de ventas con totales y detalles.
 
-### 🔹 Gestión de Clientes
+### 🔹 Clientes
 - Registro de clientes frecuentes.
-- Consulta del historial de compras.
+- Consulta de historial de compras por cliente.
 
-### 🔹 Gestión de Usuarios y Roles
-- Módulo para administración de usuarios del sistema.
-- Control básico de acceso a funciones (login/logout).
+### 🔹 Usuarios
+- Administración de usuarios del sistema.
+- Control de login y logout.
+- Protección de acceso a rutas específicas.
 
-### 🔹 Dashboard Resumen
-- Panel principal con resumen general de productos, ventas y clientes.
+### 🔹 Dashboard
+- Vista principal con resumen de inventario, ventas y estadísticas básicas.
 
 ---
 
 ## 🧰 Tecnologías Utilizadas
 
-| Tipo | Tecnología / Herramienta |
-|------|----------------------------|
-| **Backend** | [PHP 8+](https://www.php.net/) con [CodeIgniter 4.6](https://codeigniter.com/) |
+| Categoría | Tecnologías |
+|------------|-------------|
+| **Backend** | PHP 8.1+, CodeIgniter 4.6 |
 | **Frontend** | HTML5, CSS3, Bootstrap 5, JavaScript, jQuery |
 | **Base de Datos** | MySQL / MariaDB |
-| **Servidor local** | XAMPP |
-| **Librerías externas** | [DataTables](https://datatables.net/), [FontAwesome](https://fontawesome.com/), [Bootstrap Icons](https://icons.getbootstrap.com/) |
-| **Control de versiones** | Git y GitHub (opcional) |
+| **Servidor Local** | XAMPP |
+| **Librerías Externas** | DataTables, Bootstrap Icons, FontAwesome |
+| **Gestor de Dependencias** | Composer |
+| **Control de Versiones** | Git / GitHub |
 
 ---
 
 ## 🗂️ Estructura del Proyecto
+
+La estructura real del proyecto es la siguiente:
 
