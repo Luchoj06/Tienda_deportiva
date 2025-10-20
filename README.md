@@ -67,3 +67,24 @@ Incluye módulos de:
 
 La estructura real del proyecto es la siguiente:
 
+app/
+│
+├── Config/ # Configuración general del sistema
+├── Controllers/ # Controladores del MVC (Productos, Ventas, Usuarios, Clientes, etc.)
+├── Database/
+│ ├── Migrations/ # Estructura de tablas (migraciones)
+│ └── Seeds/ # Datos iniciales (semillas)
+├── Filters/ # Filtros de autenticación y permisos
+├── Helpers/ # Funciones auxiliares
+├── Language/ # Archivos de idioma (traducciones)
+├── Libraries/ # Clases adicionales personalizadas
+├── Models/ # Modelos de base de datos
+├── ThirdParty/ # Librerías externas opcionales
+└── Views/ # Vistas HTML + PHP (interfaz de usuario)
+├── layout/ # Plantilla base (main.php)
+├── productos/ # CRUD de productos
+├── tipos/ # CRUD de tipos de productos
+├── usuarios/ # CRUD de usuarios
+├── clientes/ # CRUD de clientes
+└── ventas/ # Módulo de ventas
+
