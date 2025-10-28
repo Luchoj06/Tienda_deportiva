@@ -24,30 +24,44 @@
 
     <!-- Mensaje de error -->
     <?php if(session()->getFlashdata('error')): ?>
-      <div class="alert alert-danger">
+      <div class="alert alert-danger" role="alert">
         <?= session()->getFlashdata('error') ?>
       </div>
     <?php endif; ?>
 
     <!-- Formulario de login -->
-    <form method="post" action="<?= site_url('login/doLogin') ?>">
+    <form method="post" action="<?= site_url('login/doLogin') ?>" novalidate>
       <?= csrf_field() ?>
 
       <div class="mb-3">
-        <label class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" required>
+        <label for="email" class="form-label">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          class="form-control" 
+          placeholder="Ingresa tu correo electrónico" 
+          required 
+          autocomplete="username">
       </div>
 
       <div class="mb-3">
-        <label class="form-label">Contraseña</label>
-        <input type="password" name="password" class="form-control" required>
+        <label for="password" class="form-label">Contraseña</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          class="form-control" 
+          placeholder="Ingresa tu contraseña" 
+          required 
+          autocomplete="current-password">
       </div>
 
-      <button class="btn btn-primary w-100">Ingresar</button>
+      <button type="submit" class="btn btn-primary w-100">Ingresar</button>
     </form>
   </div>
 
-  <!-- Bootstrap JS (opcional, para componentes interactivos como modales) -->
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
