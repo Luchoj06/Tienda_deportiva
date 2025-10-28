@@ -43,7 +43,7 @@ class VentaController extends Controller
         // Usuario logueado (cajero o vendedor)
         $usuario_id = session()->get('id');
 
-        // 🔥 Buscar el precio del producto
+        
         $producto = $this->productoModel->find($producto_id);
         if (!$producto) {
             return redirect()->back()->with('error', 'Producto no encontrado');
@@ -52,7 +52,7 @@ class VentaController extends Controller
         $precio = $producto['precio'];
         $total  = $precio * $cantidad;
 
-        // Guardar la venta
+        
         $this->ventaModel->save([
             'cliente_id'  => $cliente_id,
             'usuario_id'  => $usuario_id,
@@ -62,7 +62,7 @@ class VentaController extends Controller
             'fecha'       => $fecha,
         ]);
 
-        // Reducir el stock del producto
+        
         $nuevoStock = max(0, $producto['stock'] - $cantidad);
         $this->productoModel->update($producto_id, ['stock' => $nuevoStock]);
 
@@ -76,10 +76,9 @@ class VentaController extends Controller
         $cantidad    = (int) $this->request->getPost('cantidad');
         $fecha       = $this->request->getPost('fecha');
 
-        // Usuario logueado (cajero o vendedor)
+        
         $usuario_id = session()->get('id');
 
-        // 🔥 Buscar el precio del producto
         $producto = $this->productoModel->find($producto_id);
         if (!$producto) {
             return redirect()->back()->with('error', 'Producto no encontrado');
@@ -88,7 +87,7 @@ class VentaController extends Controller
         $precio = $producto['precio'];
         $total  = $precio * $cantidad;
 
-        // Actualizar la venta
+       
         $this->ventaModel->update($id, [
             'cliente_id'  => $cliente_id,
             'usuario_id'  => $usuario_id,
