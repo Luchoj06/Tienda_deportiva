@@ -1,0 +1,41 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background: #f6f1e7;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  min-height: 100vh;
+  background: #fff;
+  border-right: 1px solid #eee;
+  position: sticky;
+  top: 0;
+}
+.sidebar .brand { font-weight: 700; color: #1f6feb; }
+.sidebar a.active,
+.sidebar a:hover {
+  background: #1f6feb;
+  color: #fff;
+  border-radius: .6rem;
+}
+
+/* Avatar */
+.avatar {
+  width:36px; height:36px; border-radius:50%;
+  background: #1f6feb; color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:600;
+}
+
+/* Login */
+.login-page {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+}
+.login-card {
+  max-width:420px;
+  width:100%;
+}
