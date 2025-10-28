@@ -25,84 +25,85 @@ class VentaController extends Controller
 
     public function index()
     {
-        $data['ventas']    = $this->ventaModel->findAll();
-        $data['usuarios']  = $this->usuarioModel->findAll();
-        $data['productos'] = $this->productoModel->findAll();
-        $data['clientes']  = $this->clienteModel->findAll();
+        $data = [
+            'ventas'    => $this->ventaModel->findAll(),
+            'usuarios'  => $this->usuarioModel->findAll(),
+            'productos' => $this->productoModel->findAll(),
+            'clientes'  => $this->clienteModel->findAll()
+        ];
 
         return view('ventas/index', $data);
     }
 
-    public function store()
+    // 🔹 Función privada para evitar duplicidad
+    private function obtenerDatosVenta()
     {
         $cliente_id  = $this->request->getPost('cliente_id');
         $producto_id = $this->request->getPost('producto_id');
         $cantidad    = (int) $this->request->getPost('cantidad');
         $fecha       = $this->request->getPost('fecha');
+        $usuario_id  = session()->get('id');
 
-        // Usuario logueado (cajero o vendedor)
-        $usuario_id = session()->get('id');
-
-        
         $producto = $this->productoModel->find($producto_id);
+
         if (!$producto) {
-            return redirect()->back()->with('error', 'Producto no encontrado');
+            throw new \Exception('Producto no encontrado');
         }
 
         $precio = $producto['precio'];
         $total  = $precio * $cantidad;
 
-        
+        return compact('cliente_id', 'producto_id', 'cantidad', 'fecha', 'usuario_id', 'total', 'producto');
+    }
+
+    public function store()
+    {
+        try {
+            $datos = $this->obtenerDatosVenta();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
+        // Guardar venta
         $this->ventaModel->save([
-            'cliente_id'  => $cliente_id,
-            'usuario_id'  => $usuario_id,
-            'producto_id' => $producto_id,
-            'cantidad'    => $cantidad,
-            'total'       => $total,
-            'fecha'       => $fecha,
+            'cliente_id'  => $datos['cliente_id'],
+            'usuario_id'  => $datos['usuario_id'],
+            'producto_id' => $datos['producto_id'],
+            'cantidad'    => $datos['cantidad'],
+            'total'       => $datos['total'],
+            'fecha'       => $datos['fecha'],
         ]);
 
-        
-        $nuevoStock = max(0, $producto['stock'] - $cantidad);
-        $this->productoModel->update($producto_id, ['stock' => $nuevoStock]);
+        // Actualizar stock
+        $nuevoStock = max(0, $datos['producto']['stock'] - $datos['cantidad']);
+        $this->productoModel->update($datos['producto_id'], ['stock' => $nuevoStock]);
 
-        return redirect()->to('/ventas');
+        return redirect()->to('/ventas')->with('success', 'Venta registrada correctamente');
     }
 
     public function update($id)
     {
-        $cliente_id  = $this->request->getPost('cliente_id');
-        $producto_id = $this->request->getPost('producto_id');
-        $cantidad    = (int) $this->request->getPost('cantidad');
-        $fecha       = $this->request->getPost('fecha');
-
-        
-        $usuario_id = session()->get('id');
-
-        $producto = $this->productoModel->find($producto_id);
-        if (!$producto) {
-            return redirect()->back()->with('error', 'Producto no encontrado');
+        try {
+            $datos = $this->obtenerDatosVenta();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
         }
 
-        $precio = $producto['precio'];
-        $total  = $precio * $cantidad;
-
-       
         $this->ventaModel->update($id, [
-            'cliente_id'  => $cliente_id,
-            'usuario_id'  => $usuario_id,
-            'producto_id' => $producto_id,
-            'cantidad'    => $cantidad,
-            'total'       => $total,
-            'fecha'       => $fecha,
+            'cliente_id'  => $datos['cliente_id'],
+            'usuario_id'  => $datos['usuario_id'],
+            'producto_id' => $datos['producto_id'],
+            'cantidad'    => $datos['cantidad'],
+            'total'       => $datos['total'],
+            'fecha'       => $datos['fecha'],
         ]);
 
-        return redirect()->to('/ventas');
+        return redirect()->to('/ventas')->with('success', 'Venta actualizada correctamente');
     }
 
     public function delete($id)
     {
         $this->ventaModel->delete($id);
-        return redirect()->to('/ventas');
+        return redirect()->to('/ventas')->with('success', 'Venta eliminada correctamente');
     }
 }
